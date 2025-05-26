@@ -33,13 +33,14 @@ namespace LCDDigitsLibrary
 
             foreach(var digit in input)
             {
-                if (_lcdMapped.ContainsKey(digit))
-                {
-                    var lcdRepresentation = _lcdMapped[digit];
-                    lcdPrint[0] += lcdRepresentation[0] + "";
-                    lcdPrint[1] += lcdRepresentation[1] + "";
-                    lcdPrint[2] += lcdRepresentation[2] + "";
-                }
+                if (!_lcdMapped.ContainsKey(digit))
+                    throw new ArgumentException($"Invalid character in input: {digit}");
+                
+                var lcdRepresentation = _lcdMapped[digit];
+                lcdPrint[0] += lcdRepresentation[0] + "";
+                lcdPrint[1] += lcdRepresentation[1] + "";
+                lcdPrint[2] += lcdRepresentation[2] + "";
+                
             }
             return string.Join("\n", lcdPrint).TrimEnd();
         }
