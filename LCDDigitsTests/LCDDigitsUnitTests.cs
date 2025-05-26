@@ -36,6 +36,32 @@ namespace LCDDigitsTests
             Assert.Equal(expected, result);
         }
 
+        [Fact]
+        public void GenerateLCD_MultipleDigits_ReturnsLCDRepresentation()
+        {
+            // Arrange
+            var lcdDigits = new LCDDigits();
+
+            // Act
+            var result = lcdDigits.GenerateLCD("910");
+
+            // Assert
+            var expected = Align(
+            @"._....._.
+              |_|..||.|
+              ..|..||_|");
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void GenerateLCD_NonDigitInput_ThrowsArgumentException()
+        {
+            // Arrange
+            var lcdDigits = new LCDDigits();
+
+            // Act & Assert
+            Assert.Throws<ArgumentException>(() => lcdDigits.GenerateLCD("9a1"));
+        }
 
         //helper function to pretty print digits
         public static string Align(string input)
